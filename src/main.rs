@@ -71,6 +71,9 @@ async fn output_task(cmd: &str, mut channels: Vec<Receiver<String>>) -> Result<(
                 Some(_) => continue,
                 None => {
                     channel_closed[changed_ix] = true;
+                    if channel_closed.iter().all(|x| *x) {
+                        return Ok(());
+                    }
                 }
             }
         };
